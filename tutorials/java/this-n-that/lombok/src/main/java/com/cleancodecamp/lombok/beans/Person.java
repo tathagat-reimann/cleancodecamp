@@ -24,7 +24,7 @@ public class Person {
     public static void main(String[] args) {
         Person john = new Person("john", "tranvolta");
 
-        logger.debug(john.toString());
+        log.debug(john.toString());
 
         System.out.println(john);
     }
