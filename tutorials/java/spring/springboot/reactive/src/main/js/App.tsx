@@ -6,19 +6,38 @@ const App: React.FC = () => {
     const [options, setOptions] = useState<string[]>([]);
 
     useEffect(() => {
-        // Replace with your API endpoint
-        fetch('/api/accounts')
-            .then(response => response.json())
-            .then(data => setOptions(data))
-            .catch(error => console.error('Error fetching options:', error));
+        const eventSource = new EventSource('/api/accounts');
+
+        eventSource.onmessage = (event) => {
+            const newOption = event.data;
+            setOptions(prevOptions => [...prevOptions, newOption]);
+        };
+
+        eventSource.onerror = (error) => {
+            console.error('Error fetching options:', error);
+            eventSource.close();
+        };
+
+        return () => {
+            eventSource.close();
+        };
     }, []);
 
     return (
-        <select>
-            {options.map((option, index) => (
-                <option key={index} value={option}>{option}</option>
-            ))}
-        </select>
+        <table>
+            <thead>
+                <tr>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {options.map((option, index) => (
+                    <tr key={index}>
+                        <td>{option}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
     );
 };
 
