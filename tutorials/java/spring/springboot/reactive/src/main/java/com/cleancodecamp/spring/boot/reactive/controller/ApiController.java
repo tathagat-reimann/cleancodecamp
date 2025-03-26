@@ -28,7 +28,7 @@ public class ApiController {
     }
 
     @GetMapping(value = "/accounts", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> getAccounts2() {
+    public Flux<String> getAccounts() {
         Flux<String> fastAccounts = fastService.getAccounts();
         Flux<String> slowAccounts = slowService.getAccounts();
         return Flux.merge(fastAccounts, slowAccounts);
