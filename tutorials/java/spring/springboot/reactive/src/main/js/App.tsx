@@ -41,11 +41,10 @@ const App: React.FC = () => {
             <CssBaseline />
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
-                    <Grid size={3}/>
-                    <Grid size={6}>
+                    <Grid size={3}>
                         <DenseTable data={options} />
                     </Grid>
-                    <Grid size={3}/>
+                    <Grid size={9}/>
                 </Grid>
             </Box>
 

@@ -9,6 +9,5 @@ import java.util.Arrays;
 public class FastService {
     public Flux<String> getAccounts() {
         return Flux.fromIterable(Arrays.asList("fast_1", "fast_2", "fast_3"));
-//        return Flux.fromIterable(accounts);
     }
 }

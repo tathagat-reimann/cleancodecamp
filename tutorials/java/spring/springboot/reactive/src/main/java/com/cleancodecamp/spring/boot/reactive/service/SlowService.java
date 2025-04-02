@@ -10,7 +10,9 @@ import java.util.Arrays;
 
 @Service
 public class SlowService {
+
     Logger logger = LoggerFactory.getLogger(SlowService.class);
+
     public Flux<String> getAccounts() {
         return Flux.fromIterable(Arrays.asList("slow_1", "slow_2", "slow_3"))
                 .delayElements(Duration.ofSeconds(3))
